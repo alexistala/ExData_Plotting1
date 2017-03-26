@@ -9,7 +9,8 @@ library(tidyr)
 hpc <- read_delim(filepath, ";", escape_double = FALSE, 
                   locale = locale(time_format = ""), 
                   na = "?", trim_ws = TRUE) %>%
-  mutate(Date = format(as.Date(Date, "%d/%m/%Y"),"%Y-%m-%d"),
+  mutate(DateTime = paste(Date, Time),
+         Date = format(as.Date(Date, "%d/%m/%Y"),"%Y-%m-%d"),
          Time = format(strptime(Time, "%H:%M:%S"),"%H:%M:%S")) %>% 
   filter(Date>="2007-02-01", Date<="2007-02-02")
 
